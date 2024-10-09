@@ -5,13 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 
 {
+    private Rigidbody playerRb;
     private GameObject focalPoint;
-    private Rigidbody PlayerRb;
     public float speed = 5.0f;
+    public bool hasPowerup = false;
     // Start is called before the first frame update
     void Start()
     {
-        PlayerRb = GetComponent<Rigidbody>();
+        playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal Point");
     }
 
@@ -19,6 +20,27 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float forwardInput = Input.GetAxis("Vertical");
-        PlayerRb.AddForce(focalPoint.transform.forward * speed * forwardInput); 
+
+        playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed); 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && hasPowerup)     
+            {
+            Debug.Log("Collided with" +  collision.gameObject.name + "with power up set to" + hasPowerup);
+        }
+        {
+            
+        }
     }
 }
