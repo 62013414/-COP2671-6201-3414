@@ -6,9 +6,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed = 3.0f;
-    internal int Length;
     private Rigidbody enemyRb;
     private GameObject player;
+
+    public int Length { get; internal set; }
 
     // Start is called before the first frame update
     void Start()

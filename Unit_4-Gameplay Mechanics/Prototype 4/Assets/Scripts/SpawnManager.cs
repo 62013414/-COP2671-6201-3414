@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour
         SpawnEnemyWave(waveNumber);
         Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
     }
+    // Update is called once per frame
     void Update()
     {
         enemyCount = FindObjectOfType<Enemy>().Length;
@@ -40,6 +41,6 @@ public class SpawnManager : MonoBehaviour
         return randomPos;
 
     }
-    // Update is called once per frame
+    
     
 }
