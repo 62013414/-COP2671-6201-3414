@@ -1,40 +1,70 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;  // TextMeshPro for UI text
 
-public class LapCounter : MonoBehaviour
+public class LapTimer : MonoBehaviour
 {
-    public int totalLaps = 3;
+    public int totalLaps = 2;
     private int currentLap = 0;
+    private bool raceStarted = false;
 
-    void OnTriggerEnter(Collider other)
+    public Transform startLine;
+    public TextMeshProUGUI lapText;
+    public TextMeshProUGUI timerText;
+
+    private float lapStartTime;
+    private float raceTime;
+
+    void Start()
     {
-        if (other.CompareTag("Player"))
-        {
-            currentLap++;
-            Debug.Log("Lap " + currentLap + " completed!");
+        UpdateLapText();
+    }
 
-            if (currentLap >= totalLaps)
+    void Update()
+    {
+        if (raceStarted)
+        {
+            // Update the timer every frame
+            raceTime = Time.time - lapStartTime;
+            timerText.text = "Time: " + raceTime.ToString("F2") + "s";
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Ensure the trigger works only if the player crosses the start line
+        if (other.CompareTag("Player") && other.transform == startLine)
+        {
+            if (!raceStarted)
             {
-                EndRace();
+                // Start the race
+                raceStarted = true;
+                lapStartTime = Time.time;
+                Debug.Log("Race Started!");
+            }
+            else
+            {
+                currentLap++;
+
+                if (currentLap >= totalLaps)
+                {
+                    // Race complete
+                    raceStarted = false;
+                    Debug.Log("Race Completed! Final Time: " + raceTime.ToString("F2") + "s");
+                    lapText.text = "Race Completed!";
+                }
+                else
+                {
+                    // Continue to the next lap
+                    lapStartTime = Time.time;
+                    UpdateLapText();
+                    Debug.Log("Lap " + currentLap + " completed. Starting lap " + (currentLap + 1));
+                }
             }
         }
     }
-        void EndRace()
-        {
-            // Logic to end the race, show results, or transition to next level
-            Debug.Log("Race Finished! You completed all laps.");
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-    
+    void UpdateLapText()
+    {
+        lapText.text = "Lap: " + (currentLap + 1) + " / " + totalLaps;
+    }
 }
