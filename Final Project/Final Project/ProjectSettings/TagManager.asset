@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FinishLine
   - startLine
+  - Obstacle
   layers:
   - Default
   - TransparentFX
