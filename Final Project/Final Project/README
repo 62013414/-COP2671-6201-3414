@@ -1,0 +1,62 @@
+# Race Game
+
+## Course Information
+**Course Number:**  COP2671.0T1
+**Student Name:** Rafael Gomez
+
+---
+
+## Game Overview
+This is a 3D race game where players aim to complete as many laps as possible in 2 minutes while avoiding obstacles and staying on the track. The game is built using Unity and features interactive gameplay with visual and audio feedback.
+
+---
+
+## Instructions
+
+### Objective
+Complete as many laps as possible within the time limit while collecting coins and avoiding penalties from collisions.
+
+### Key Commands
+- **W / Up Arrow**: Accelerate
+- **A / Left Arrow**: Turn Left
+- **D / Right Arrow**: Turn Right
+- **S / Down Arrow**: Brake/Reverse
+- **Esc**: Pause/Resume the game
+
+### Game Mechanics
+1. **Laps**: Pass the finish line to complete a lap. Your total lap count will be displayed on the screen.
+2. **Time Limit**: You have 2 minutes to complete as many laps as possible. The timer is displayed at the top.
+3. **Obstacles**: Hitting obstacles will deduct time from your total. Avoid them to maximize your score.
+5. **Game Over**: The game ends when the timer runs out, and your total laps will be shown.
+
+---
+
+## Features
+- **Dynamic Timer**: Tracks the remaining time and displays it in real time.
+- **Lap Counter**: Updates the lap count as you complete each lap.
+- **Obstacle Penalties**: Hitting obstacles reduces time by 10 seconds.
+- **Pause Menu**: Pause the game by pressing `Esc` to resume or quit.
+- **Audio Feedback**: Engine sound at the start, collision sound on impact, and malfunction sound if you hit more than five obstacles.
+
+---
+
+## How to Play
+1. Launch the game.
+2. Read the instructions displayed in the start menu.
+3. Click **Start Game** to begin.
+4. Use the key commands to control your vehicle and aim to complete laps while avoiding obstacles.
+5. Press `Esc` during the game to pause or resume.
+6. Try avoid penalties to maximize your score.
+7. The game ends when the timer runs out.
+
+---
+
+## Key Assets
+- **Environment**: Custom-designed race track with dynamic obstacles.
+- **Sound Effects**:
+  - Engine start sound
+  - Collision sound
+  - Malfunction sound (after 5 collisions)
+  - Coin collection sound
+
+---
