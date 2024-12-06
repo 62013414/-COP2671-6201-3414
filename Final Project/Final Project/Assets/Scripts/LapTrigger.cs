@@ -19,7 +19,7 @@ public class LapTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameObject.FindObjectOfType<RaceTimer>().CompleteLap();
+            GameObject.FindObjectOfType<RaceTimer>().PassFinishLine();
         }
     }
 }

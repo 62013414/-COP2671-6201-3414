@@ -1,26 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RaceTimer : MonoBehaviour
 {
     public float raceDuration = 12f; // 2 minutes
-    public TextMeshProUGUI timerText; // Timer UI text
-    public TextMeshProUGUI lapText; // Lap counter UI text
-    public TextMeshProUGUI messageText; // Message UI text for penalties or win message
+    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI lapText;
+    public TextMeshProUGUI messageText;
+    public GameObject gameOverPanel;
+    public Button restartButton;
+    public Button quitButton;
 
     private float remainingTime;
     private int completedLaps = 0;
     private bool raceActive = true;
+    private bool firstPass = true;
 
     void Start()
     {
         remainingTime = raceDuration;
         UpdateTimerUI();
         UpdateLapUI();
-        messageText.text = "Start The game"; // Clear the message at the start
-        Invoke("ClearMessage", 2f);
+        messageText.text = "LETS GO!!";
+        Invoke("ClearMessage", 1f);
+        gameOverPanel.SetActive(false);
     }
 
     void Update()
@@ -38,14 +44,22 @@ public class RaceTimer : MonoBehaviour
         }
     }
 
-    public void CompleteLap()
+    public void PassFinishLine()
     {
         if (raceActive)
         {
-            completedLaps++;
-            UpdateLapUI();
-            messageText.text = "Lap Completed!";
-            Invoke("ClearMessage", 2f); // Clear message after 2 seconds
+            if (firstPass)
+            {
+                messageText.text = "Game Started!";
+                firstPass = false;
+            }
+            else
+            {
+                completedLaps++;
+                UpdateLapUI();
+                messageText.text = "Lap Completed!";
+            }
+            Invoke("ClearMessage", 2f);
         }
     }
 
@@ -53,9 +67,9 @@ public class RaceTimer : MonoBehaviour
     {
         if (raceActive)
         {
-            remainingTime -= 10f; // Penalty of 10 seconds
+            remainingTime -= 10f;
             messageText.text = "10 Seconds Penalty!";
-            Invoke("ClearMessage", 2f); // Clear message after 2 seconds
+            Invoke("ClearMessage", 2f);
         }
     }
 
@@ -77,6 +91,28 @@ public class RaceTimer : MonoBehaviour
     void EndRace()
     {
         raceActive = false;
-        messageText.text = "Race Over! Total Laps: " + completedLaps;
+        messageText.text = "Game Over! Total Laps: " + completedLaps;
+        EndGame();
+    }
+
+    public void EndGame()
+    {
+        Time.timeScale = 0f;
+        gameOverPanel.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+       
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+    }
+    
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit button clicked!");
+        Application.Quit();
     }
 }
