@@ -36,11 +36,7 @@ public class MenuManager : MonoBehaviour
         startMenu.SetActive(true);
         pauseMenu.SetActive(false);
         Time.timeScale = 0f; // Pause the game at the start
-        instructionsText.text = "Welcome to the Race Game!\n\n" +
-           "Instructions:\n" +
-           "- Complete as many laps as you can in 2 minutes.\n" +
-           "- Avoid obstacles and don't fall off the road.\n\n" +
-           "Press 'Start' to begin!";
+        instructionsText.text = "";
         Time.timeScale = 0f; // Pause the game at the start
     }
 
